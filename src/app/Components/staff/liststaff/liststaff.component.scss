@@ -1,0 +1,63 @@
+/* Centralizar a tabela na página */
+.staff-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 90%;
+  }
+  
+  /* Estilo do título */
+  .staff-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Mensagem de lista vazia */
+  .staff-empty {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+  }
+  
+  /* Estilo da tabela */
+  .staff-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .staff-table th,
+  .staff-table td {
+    border: 1px solid #ddd; /* Borda das células */
+    padding: 10px 15px; /* Espaçamento interno */
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .staff-table th {
+    background-color: #4CAF50; /* Fundo dos cabeçalhos */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .staff-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alterna a cor de linhas */
+  }
+  
+  .staff-table tr:hover {
+    background-color: #ddd; /* Cor ao passar o rato */
+  }
+  
+  /* Ajuste para os horários */
+  .staff-table td div {
+    margin: 2px 0;
+    color: #555;
+  }
+  

@@ -1,0 +1,39 @@
+<div class="patient-container">
+    <h2 class="patient-title">Patients Profiles List</h2>
+  
+    <p *ngIf="patientList.length === 0" class="patient-empty">No patients available at the moment.</p>
+  
+    <table *ngIf="patientList.length > 0" class="patient-table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Full Name</th>
+          <th>Birth Date</th>
+          <th>Gender</th>
+          <th>Medical Record Number</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Emergency Phone</th>
+          <th>Updates Executed</th>
+          <th>Sequential Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patientList">
+          <td>{{ patient.firstName }}</td>
+          <td>{{ patient.lastName }}</td>
+          <td>{{ patient.fullName }}</td>
+          <td>{{ patient.birthDate | date: 'yyyy-MM-ddThh:mm:ss' }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>{{ patient.medicalRecordNumber }}</td>
+          <td>{{ patient.phone }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.emergencyPhone }}</td>
+          <td>{{ patient.updatesExecuted }}</td>
+          <td>{{ patient.sequentialNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

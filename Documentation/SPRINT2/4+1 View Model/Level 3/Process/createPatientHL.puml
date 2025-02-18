@@ -1,0 +1,17 @@
+@startuml "CreatePatient_HighLevel"
+
+actor Admin as User
+rectangle "Sistema de Gestão de Pacientes" {
+    [Interface de Usuário]
+    [Serviço de Gerenciamento de Pacientes]
+    [Banco de Dados/API Backend]
+}
+
+User -> [Interface de Usuário]: 1. Preenche os dados do paciente e clica em "Salvar"
+[Interface de Usuário] -> [Serviço de Gerenciamento de Pacientes]: 2. Envia os dados do paciente
+[Serviço de Gerenciamento de Pacientes] -> [Banco de Dados/API Backend]: 3. Salva os dados no backend
+[Banco de Dados/API Backend] --> [Serviço de Gerenciamento de Pacientes]: 4. Retorna o status da criação
+[Serviço de Gerenciamento de Pacientes] --> [Interface de Usuário]: 5. Retorna mensagem de sucesso ou erro
+[Interface de Usuário] --> User: 6. Exibe o resultado ao usuário
+
+@enduml

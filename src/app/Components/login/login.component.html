@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row card col-md-6 offset-md-3 mt-5">
+        <h3 class="card-title text-center mt-3">Health Care App</h3>
+
+        <form [formGroup]="loginForm" class="card-body p-lg-3">
+            <mat-form-field class="col-md-8 offset-md-2">
+                <mat-label>E-mail</mat-label>
+                <input type="email" placeholder="johndoe@example.com" matInput formControlName="email" required>
+                @if (errorMessages()['email']) {
+                <mat-error>{{ errorMessages()['email'] }}</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="col-md-8 offset-md-2">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password" (blur)="updateErrorMessages()" required>
+                @if (loginForm.controls['password'].invalid) {
+                <mat-error>{{ errorMessages()['password'] }}</mat-error>
+                }
+            </mat-form-field>
+
+            <button type="submit" class="col-md-6 offset-md-3" mat-raised-button (click)="tryLogin()">Login</button>
+        </form>
+    </div>
+</div>

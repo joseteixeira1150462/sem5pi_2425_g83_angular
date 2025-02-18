@@ -1,0 +1,68 @@
+<a routerLink="/operation-request" routerLinkActive="active">Back</a>
+<div class="container">
+    <h2>Create Operation Request</h2>
+    <form [formGroup]="operationRequestForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="PatientId">Patient ID</label>
+        <input
+          type="text"
+          id="PatientId"
+          class="form-control"
+          formControlName="PatientId"
+          placeholder="Enter Patient ID"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="DoctorId">Doctor ID</label>
+        <input
+          type="text"
+          id="DoctorId"
+          class="form-control"
+          formControlName="DoctorId"
+          placeholder="Enter Doctor ID"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="OperationTypeId">Operation Type ID</label>
+        <input
+          type="text"
+          id="OperationTypeId"
+          class="form-control"
+          formControlName="OperationTypeId"
+          placeholder="Enter Operation Type ID"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="OperationRequestPriority">Priority</label>
+        <select id="OperationRequestPriority" class="form-control" formControlName="OperationRequestPriority" required>
+          <option value="">Select Priority</option>
+          <option value="Prio1">Prio1</option>
+          <option value="Prio2">Prio2</option>
+          <option value="Prio3">Prio3</option>
+          <option value="Prio4">Prio4</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="DeadlineDate">Deadline Date</label>
+        <input
+          type="date"
+          id="DeadlineDate"
+          class="form-control"
+          formControlName="DeadlineDate"
+          required
+        />
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="!operationRequestForm.valid">
+        Submit
+      </button>
+    </form>
+  </div>
+  

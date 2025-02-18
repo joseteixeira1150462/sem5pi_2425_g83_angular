@@ -1,0 +1,84 @@
+<h3>Creating Operation Type</h3>
+
+<div>
+    <form [formGroup]="operationTypeForm">
+        <div class="d-flex">
+            <mat-form-field class="w-50">
+                <mat-label>Name</mat-label>
+                <input type="text" placeholder="Kneecap Replacement Surgery" matInput formControlName="name"
+                    (blur)="updateErrorMessages()" required>
+                @if (errorMessages()['name']) {
+                <mat-error>{{ errorMessages()['name'] }}</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex w-50">
+            <mat-form-field>
+                <mat-label>Preparation</mat-label>
+                <input type="number" matInput formControlName="preparation" (blur)="updateErrorMessages()" required>
+                @if (operationTypeForm.controls['preparation'].invalid) {
+                <mat-error>{{ errorMessages()['preparation'] }}</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Operation</mat-label>
+                <input type="number" matInput formControlName="operation" (blur)="updateErrorMessages()" required>
+                @if (operationTypeForm.controls['operation'].invalid) {
+                <mat-error>{{ errorMessages()['operation'] }}</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Cleaning</mat-label>
+                <input type="number" matInput formControlName="cleaning" (blur)="updateErrorMessages()" required>
+                @if (operationTypeForm.controls['cleaning'].invalid) {
+                <mat-error>{{ errorMessages()['cleaning'] }}</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <div formArrayName="specializations">
+            <h6>Specializations</h6>
+
+            <div *ngFor="let fieldGroup of specializations.controls; let i = index" [formGroupName]="i">
+                <mat-form-field>
+                    <mat-label>Quantity</mat-label>
+                    <input type="number" matInput formControlName="quantity" required>
+                    @if (errorMessages()['specializations[' + i + '].quantity']) {
+                    <mat-error>{{ errorMessages()['specializations[' + i + '].quantity'] }}</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role" required>
+                        <mat-option *ngFor="let role of rolesList" [value]="role">{{ role }}</mat-option>
+                    </mat-select>
+                    @if (errorMessages()['specializations[' + i + '].role']) {
+                    <mat-error>{{ errorMessages()['specializations[' + i + '].role'] }}</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Specialization</mat-label>
+                    <mat-select formControlName="specialization" required>
+                        <mat-option *ngFor="let specialization of specializationsList" [value]="specialization">
+                            {{ specialization }}
+                        </mat-option>
+                    </mat-select>
+                    @if (errorMessages()['specializations[' + i + '].specialization']) {
+                    <mat-error>{{ errorMessages()['specializations[' + i + '].specialization'] }}</mat-error>
+                    }
+                </mat-form-field>
+
+                <button mat-icon-button (click)="removeSpecialization(i)" aria-label="Remove Field"
+                    *ngIf="specializations.length > 1">
+                    <mat-icon>remove_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <button mat-raised-button (click)="addSpecialization()">Add Field</button>
+
+        <button type="submit" mat-raised-button (click)="tryCreate()">Create</button>
+    </form>
+</div>

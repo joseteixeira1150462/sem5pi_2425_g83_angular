@@ -1,0 +1,29 @@
+@startuml "DeactivateStaff"
+actor Admin
+participant "UI" as UI
+participant "StaffComponent" as Component
+participant "StaffService" as Service
+participant "StaffRepository" as Repository
+participant "Backend" as Backend
+participant "DTO" as DTO
+
+Admin -> UI: 1.1 Click to "Deactivate Staff"
+UI -> Component: 1.2 Confirm Deactivation
+Component -> Service: 1.3 Process Deactivation Request
+Service -> DTO: 1.4 Create Deactivation DomainDTO
+DTO --> Service: Return DomainDTO
+Service -> Repository: 1.5 Send Deactivation Request (DomainDTO)
+Repository -> Backend: 1.6 API Call to Deactivate Staff
+Backend --> Repository: 1.7 Return Success/Error (ResponseDTO)
+Repository --> Service: 1.8 Return Result (ResponseDTO)
+Service --> Component: 1.9 Return Success/Error
+Component --> UI: 1.10 Render Success/Error Message
+
+alt Success
+UI -> Admin: 1.11 Show Success Message
+end
+
+alt Failure
+UI -> Admin: 1.12 Show Error Message
+end
+@enduml

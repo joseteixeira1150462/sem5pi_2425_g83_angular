@@ -1,0 +1,47 @@
+<div class="staff-container">
+    <h2 class="staff-title">Lista de Staff</h2>
+  
+    <p *ngIf="staffList.length === 0" class="staff-empty">Nenhum staff disponível no momento.</p>
+  
+    <table *ngIf="staffList.length > 0" class="staff-table">
+      <thead>
+        <tr>
+          <th>Primeiro Nome</th>
+          <th>Último Nome</th>
+          <th>Especialização</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Licença</th>
+          <th>Horários Disponíveis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let staff of staffList">
+          <td>{{ staff.firstname }}</td>
+          <td>{{ staff.lastname }}</td>
+          <td>{{ staff.specialization }}</td>
+          <td>{{ staff.phone }}</td>
+          <td>{{ staff.email }}</td>
+          <td>{{ staff.licensenumber }}</td>
+          <td>
+            <div *ngIf="staff.avaibilityslots?.length; else noSlots">
+              <div *ngFor="let slot of staff.avaibilityslots">
+                {{ slot.start | date: 'MM/dd/yyyy' }}: {{ slot.start | date: 'shortTime' }} - {{ slot.end | date: 'shortTime' }}
+              </div>
+            </div>
+            <ng-template #noSlots>Sem horários</ng-template>
+          </td>
+          <td>
+            <!-- Botão para editar -->
+            <button mat-raised-button color="primary" type="button" (click)="editStaff(staff)">
+              Editar
+            </button>
+            <button mat-icon-button color="warn" (click)="deactivateStaff(staff)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

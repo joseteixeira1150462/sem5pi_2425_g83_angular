@@ -1,0 +1,42 @@
+@startuml "editStaff"
+actor Admin
+participant "UI" as UI
+participant "StaffComponent" as Component
+participant "StaffService" as Service
+participant "StaffRepository" as Repository
+participant "Backend" as Backend
+participant "DTO" as DTO
+
+Admin -> UI: 1.1 Click to "Edit Staff"
+UI -> Component: 1.2 Initialize Staff Edit Form
+Component -> Service: 1.3 Request Staff Data for Edit
+Service -> Repository: 1.4 Fetch Staff Data (RequestDTO)
+Repository -> Backend: 1.5 API Call to Get Staff Data
+Backend --> Repository: 1.6 Return Staff Data (ResponseDTO)
+Repository -> DTO: 1.7 Create ViewDTO from Raw Data
+DTO --> Repository: Return ViewDTO
+Repository --> Service: 1.8 Return Staff Data (ViewDTO)
+Service --> Component: 1.9 Return Staff Data
+Component --> UI: 1.10 Render Staff Edit Form
+
+== Update Staff ==
+Admin -> UI: 2.1 Submit Edited Staff Data
+UI -> Component: 2.2 Forward Edited Data to Component
+Component -> Service: 2.3 Process Edited Data
+Service -> DTO: 2.4 Map Edited Data to DomainDTO
+DTO --> Service: Return DomainDTO
+Service -> Repository: 2.5 Save Updated Staff Data (DomainDTO)
+Repository -> Backend: 2.6 API Call to Update Staff Data
+Backend --> Repository: 2.7 Return Success/Error (ResponseDTO)
+Repository --> Service: 2.8 Return Result (ResponseDTO)
+Service --> Component: 2.9 Return Success/Error
+Component --> UI: 2.10 Render Success/Error Message
+
+alt Success
+UI -> Admin: 2.11 Show Success Message
+end
+
+alt Failure
+UI -> Admin: 2.12 Show Error Message
+end
+@enduml

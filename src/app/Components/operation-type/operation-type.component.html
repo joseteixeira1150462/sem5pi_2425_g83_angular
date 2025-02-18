@@ -1,0 +1,58 @@
+<div style="display: flex; justify-content: space-between;">
+    <h3>Operation Types</h3>
+    <a routerLink="/operationType/create" routerLinkActive="active" mat-raised-button>Create</a>
+</div>
+
+<table mat-table [dataSource]="operationTypeList" multiTemplateDataRows class="mat-elevation-z8">
+    @for (column of columnsToDisplay; track column) {
+    <ng-container matColumnDef="{{column}}">
+        <th mat-header-cell *matHeaderCellDef class="text-capitalize"> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+    }
+    <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button aria-label="expand row"
+                (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                @if (expandedElement === element) {
+                <mat-icon>keyboard_arrow_up</mat-icon>
+                } @else {
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                }
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+            @if (element['active']) {
+            <button mat-icon-button aria-label="delete row" (click)="deleteRow(element['id'])">
+                <mat-icon>remove_circle</mat-icon>
+            </button>
+            }
+        </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <p style="font-weight: bold">Requirements</p>
+                <ul>
+                    @for (item of element.specializations; track item.id) {
+                    <p>{{ item.quantity }} {{ item.role }} - {{ item.specialization }}</p>
+                    }
+                </ul>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

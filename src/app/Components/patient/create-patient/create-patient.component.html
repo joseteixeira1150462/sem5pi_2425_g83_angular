@@ -1,0 +1,118 @@
+<div class="form-container">
+    <h2>Criar Novo Paciente</h2>
+  
+    <!-- Mensagens de Feedback -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+      <!-- Primeiro Nome e Último Nome -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Primeiro Nome*</mat-label>
+          <input matInput formControlName="firstName" placeholder="Insira o primeiro nome" />
+          <mat-error *ngIf="patientForm.get('firstName')?.hasError('required')">
+            O primeiro nome é obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Último Nome*</mat-label>
+          <input matInput formControlName="lastName" placeholder="Insira o último nome" />
+          <mat-error *ngIf="patientForm.get('lastName')?.hasError('required')">
+            O último nome é obrigatório.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+     <!-- Data de Nascimento e Gênero -->
+<div class="row">
+    <!-- Data de Nascimento -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Data de Nascimento*</mat-label>
+      <input 
+        matInput 
+        formControlName="birthDate" 
+        placeholder="Digite a data no formato YYYY-MM-DDTHH:MM:SS" 
+        type="text"
+      />
+      <mat-error *ngIf="patientForm.get('birthDate')?.hasError('required')">
+        A data de nascimento é obrigatória.
+      </mat-error>
+      <mat-error *ngIf="patientForm.get('birthDate')?.hasError('pattern')">
+        A data deve estar no formato YYYY-MM-DDTHH:MM:SS.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Gênero -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Gênero*</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+        <mat-option value="Other">Other</mat-option>
+      </mat-select>
+      <mat-error *ngIf="patientForm.get('gender')?.hasError('required')">
+        O gênero é obrigatório.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  
+  
+      <!-- Email e Telefone -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Email*</mat-label>
+          <input matInput formControlName="email" placeholder="Insira o email" />
+          <mat-error *ngIf="patientForm.get('email')?.hasError('required')">
+            O email é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="patientForm.get('email')?.hasError('email')">
+            O email deve ser válido.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Telefone*</mat-label>
+          <input matInput formControlName="phone" placeholder="Insira o telefone" />
+          <mat-error *ngIf="patientForm.get('phone')?.hasError('required')">
+            O telefone é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="patientForm.get('phone')?.hasError('pattern')">
+            O telefone deve ter exatamente 9 dígitos.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Telefone de Emergência -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Telefone de Emergência*</mat-label>
+          <input matInput formControlName="emergencyPhone" placeholder="Insira o telefone de emergência" />
+          <mat-error *ngIf="patientForm.get('emergencyPhone')?.hasError('required')">
+            O telefone de emergência é obrigatório.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Condições de Saúde (Opcional) -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Condições de Saúde</mat-label>
+          <textarea matInput formControlName="healthConditions" placeholder="Descreva as condições de saúde do paciente (opcional)"></textarea>
+        </mat-form-field>
+      </div>
+  
+      <!-- Botão de Envio -->
+      <div class="actions">
+        <button mat-raised-button color="primary" [disabled]="patientForm.invalid" class="create-patient" type="submit">
+          Criar Paciente
+        </button>
+      </div>
+    </form>
+  </div>
+  

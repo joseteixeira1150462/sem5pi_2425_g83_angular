@@ -1,0 +1,81 @@
+<div class="form-container">
+    <h2>Editar Staff</h2>
+    <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+      <!-- License Number (Somente leitura) -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>License Number</mat-label>
+          <input matInput formControlName="licenseNumber" readonly />
+        </mat-form-field>
+      </div>
+  
+      <!-- Primeiro Nome e Último Nome (Somente leitura) -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Primeiro Nome</mat-label>
+          <input matInput formControlName="firstName" readonly />
+        </mat-form-field>
+  
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Último Nome</mat-label>
+          <input matInput formControlName="lastName" readonly />
+        </mat-form-field>
+      </div>
+  
+      <!-- Telefone (Editável) -->
+      <div class="row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="phone" placeholder="Insira o telefone" />
+          <mat-error *ngIf="staffForm.get('phone')?.hasError('required')">
+            O telefone é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="staffForm.get('phone')?.hasError('pattern')">
+            O telefone deve ter exatamente 9 dígitos.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- DatePicker e campos de hora para horários -->
+      <div class="availability-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Escolha uma data</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Escolha uma data" formControlName="date" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Início</mat-label>
+          <input matInput type="time" placeholder="Escolha a hora de início" formControlName="startTime" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Fim</mat-label>
+          <input matInput type="time" placeholder="Escolha a hora de fim" formControlName="endTime" />
+        </mat-form-field>
+  
+        <!-- Botão Adicionar Horário -->
+        <button mat-mini-fab color="primary" (click)="addSlot()" type="button">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+  
+      <!-- Lista de horários adicionados -->
+      <div class="slots-list">
+        <h3>Horários Adicionados:</h3>
+        <ul>
+          <li *ngFor="let slot of availabilitySlots.controls; let i = index">
+            {{ slot.value.start | date: 'short' }} - {{ slot.value.end | date: 'short' }}
+            <button mat-icon-button color="warn" (click)="removeSlot(i)" type="button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+  

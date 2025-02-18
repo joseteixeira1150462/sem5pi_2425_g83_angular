@@ -1,0 +1,31 @@
+<h3>Create Medical Condition/h3>
+
+<div>
+    <form [formGroup]="medicalConditionForm">
+        <div class="d-flex w-50">
+            <mat-form-field>
+                <mat-label>Code</mat-label>
+                <input type="text" matInput formControlName="code" (blur)="updateErrorMessages()" required>
+                @if (medicalConditionForm.controls['code'].invalid) {
+                <mat-error>{{ errorMessages()['code'] }}</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Designation</mat-label>
+                <input type="text" matInput formControlName="designation" (blur)="updateErrorMessages()" required>
+                @if (medicalConditionForm.controls['designation'].invalid) {
+                <mat-error>{{ errorMessages()['designation'] }}</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input type="text" matInput formControlName="description" (blur)="updateErrorMessages()">
+                @if (medicalConditionForm.controls['description'].invalid) {
+                <mat-error>{{ errorMessages()['description'] }}</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <button type="submit" mat-raised-button (click)="tryCreate()">Create</button>
+    </form>
+</div>

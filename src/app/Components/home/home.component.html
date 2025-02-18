@@ -1,0 +1,43 @@
+<div class="container-fluid d-flex p-0">
+   <nav class="bg-dark bg-gradient vh-100 p-3 shadow" style="width: 250px;">
+      <ul class="nav flex-column">
+         <li class="nav-item mb-2">
+            <mat-expansion-panel hideToggle>
+               <mat-expansion-panel-header>
+                  <mat-panel-title>Staff</mat-panel-title>
+               </mat-expansion-panel-header>
+               <ul>
+                  <li><a routerLink="/staff/list" routerLinkActive="active">List</a></li>
+                  <li><a routerLink="/staff/create" routerLinkActive="active">Create</a></li>
+               </ul>
+            </mat-expansion-panel>
+         </li>
+         <li class="nav-item mb-2">
+            <a routerLink="/operationType" routerLinkActive="active" class="single-a">Operation Types</a>
+         </li>
+         <li class="nav-item mb-2">
+            <mat-expansion-panel hideToggle>
+               <mat-expansion-panel-header>
+                  <mat-panel-title>Patient</mat-panel-title>
+               </mat-expansion-panel-header>
+               <ul>
+                  <li><a routerLink="/patient/create" routerLinkActive="active">Create</a></li>
+                  <li><a routerLink="/patient/edit" routerLinkActive="active">Edit</a></li>
+                  <li><a routerLink="/patient/list" routerLinkActive="active">List</a></li>
+               </ul>
+            </mat-expansion-panel>
+         <li class="nav-item mb-2">
+            <a routerLink="/operation-request" routerLinkActive="active" class="single-a">Operation Request</a>
+         </li>
+         <li class="nav-item mb-2">
+            <a routerLink="/allergies" routerLinkActive="active" class="single-a">Allergies</a>
+         </li>
+         <li class="nav-item mb-2">
+            <a routerLink="/medicalCondition" routerLinkActive="active" class="single-a">Medical Conditions</a>
+         </li>
+      </ul>
+   </nav>
+   <div class="flex-grow-1 p-4">
+      <router-outlet></router-outlet>
+   </div>
+</div>

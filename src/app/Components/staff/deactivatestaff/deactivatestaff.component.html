@@ -1,0 +1,13 @@
+<div class="deactivate-container">
+    <h2>Desativar Staff</h2>
+    <p>Tem certeza de que deseja desativar o staff com o número de licença: <strong>{{ licenseNumber }}</strong>?</p>
+    
+    <div class="actions">
+      <!-- Botão para confirmar -->
+      <button mat-raised-button color="warn" (click)="onSubmit()">Confirmar</button>
+      
+      <!-- Botão para cancelar -->
+      <button mat-raised-button color="primary" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,32 @@
+@startuml "ListStaff"
+actor Admin
+participant "UI" as UI
+participant "StaffComponent" as Component
+participant "StaffService" as Service
+participant "StaffRepository" as Repository
+participant "Backend" as Backend
+participant "DTO" as DTO
+
+Admin -> UI: 1.1 Click to "List Staff"
+UI -> Component: 1.2 Initialize StaffComponent
+Component -> Service: 1.3 Request Staff List
+Service -> Repository: 1.4 Fetch Staff Data (RequestDTO)
+Repository -> Backend: 1.5 API Call to Fetch Staff Data
+Backend --> Repository: 1.6 Return Raw Staff Data
+Repository -> DTO: 1.7 Create ViewDTO from Raw Data
+DTO --> Repository: Return ViewDTO
+Repository --> Service: 1.8 Return Staff List (ViewDTO)
+Service --> Component: 1.9 Return Staff List
+Component --> UI: 1.10 Render Staff Table
+
+alt Success
+UI -> Admin: 1.11 Show Staff List
+end
+
+alt Failure
+Repository --> Service: 2.1 Return Error Message (ErrorDTO)
+Service --> Component: 2.2 Return Error Message (ErrorDTO)
+Component --> UI: 2.3 Render Error to Admin
+UI -> Admin: 2.4 Display Error
+end
+@enduml

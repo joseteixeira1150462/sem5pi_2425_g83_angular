@@ -1,0 +1,33 @@
+@startuml "createPatient"
+actor Admin
+participant "UI" as UI
+participant "CreatePatientComponent" as Component
+participant "PatientService" as Service
+participant "PatientRepository" as Repository
+participant "Backend" as Backend
+participant "DTO" as DTO
+ 
+Admin -> UI: 1.1 Click to "Create Patient"
+UI -> Component: 1.2 Initialize Create Patient Form
+Component -> Service: 1.3 Request Validation and Patient Data Processing
+Service -> DTO: 1.4 Map Form Data to PatientDTO
+DTO --> Service: Return PatientDTO
+Service -> Repository: 1.5 Save New Patient (PatientDTO)
+Repository -> Backend: 1.6 API Call to Create Patient
+Backend --> Repository: 1.7 Return Success/Error (ResponseDTO)
+Repository --> Service: 1.8 Return Result (ResponseDTO)
+Service --> Component: 1.9 Return Success/Error
+Component --> UI: 1.10 Render Success/Error Message
+ 
+== Create Success ==
+ 
+alt Success
+UI -> Admin: 1.11 Show Success Message
+end
+ 
+== Create Failure ==
+ 
+alt Failure
+UI -> Admin: 1.12 Show Error Message
+end
+@enduml

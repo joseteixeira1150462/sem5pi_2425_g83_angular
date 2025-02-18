@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+}
+
+th,
+td {
+    width: 25%;
+    /* Divide equally among 4 columns */
+    text-align: left;
+    /* Optional: Adjust text alignment */
+}

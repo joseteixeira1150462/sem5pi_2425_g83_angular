@@ -1,0 +1,32 @@
+<a routerLink="/operation-request" routerLinkActive="active">Back</a>
+<button (click)="refreshList()">Refresh</button>
+<div class="operation-request-list">
+    <h1>Operation Requests</h1>
+  
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Patient ID</th>
+          <th>Doctor Id</th>
+          <th>Doctor Name</th>
+          <th>Operation Type ID</th>
+          <th>Operation Type Name</th>
+          <th>Priority</th>
+          <th>Deadline Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of operationRequests">
+          <td>{{ request.id }}</td>
+          <td>{{ request.patientId}}</td>
+          <td>{{ request.doctorId }}</td>
+          <td>{{ request.doctorName || 'Loading' }}</td>
+          <td>{{ request.operationTypeId }}</td>
+          <td>{{ request.operationName  || 'Loading' }}</td>
+          <td>{{ request.priority }}</td>
+          <td>{{ request.deadlineDate | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,35 @@
+@startuml "createStaff"
+actor Admin
+participant "UI" as UI
+participant "StaffComponent" as Component
+participant "StaffService" as Service
+participant "StaffRepository" as Repository
+participant "Backend" as Backend
+participant "DTO" as DTO
+
+Admin -> UI: 1.1 Open "Create Staff" Form
+UI -> Component: 1.2 Initialize Staff Form
+Component -> Service: 1.3 Initialize Form Logic
+Service -> Repository: 1.4 Fetch Default Data (RequestDTO)
+Repository -> Backend: 1.5 API Call to Fetch Defaults
+Backend --> Repository: 1.6 Return Default Data (ResponseDTO)
+Repository --> Service: 1.7 Return Processed Data (ResponseDTO)
+Service --> Component: 1.8 Return Logic to UI (ViewDTO)
+Component --> UI: 1.9 Load "Create Staff" Form
+
+== Fill and Submit Form ==
+Admin -> UI: 2.1 Fill and Submit Form
+UI -> Component: 2.2 Forward Data to Component (ViewDTO)
+Component -> Service: 2.3 Process Submitted Data (ViewDTO)
+Service -> DTO: 2.4 Map Data to DomainDTO
+Service -> Repository: 2.5 Validate and Save Staff (DomainDTO)
+Repository -> Backend: 2.6 API Call to Create Staff (DomainDTO)
+Backend --> Repository: 2.7 Return Success/Error (ResponseDTO)
+Repository --> Service: 2.8 Map Response to DomainDTO
+Service --> Component: 2.9 Return Success/Error (ViewDTO)
+Component --> UI: 2.10 Show Success/Error Message
+UI -> Admin: 2.11 Display Success/Error Message
+
+
+@enduml
+
